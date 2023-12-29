@@ -28,6 +28,7 @@ async function login() {
       console.log(responseBody, responseBody.token)
       localStorage.setItem('token', responseBody.token)
       localStorage.setItem('isAdmin', responseBody.isAdmin)
+      localStorage.setItem('id_user', responseBody.id_user)
       loginMessageFalse.value = ''
       loginMessageTrue.value =
         "Connexion réussie ! Vous allez être redirigé sur la page d'accueil !"

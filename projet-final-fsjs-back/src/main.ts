@@ -34,6 +34,7 @@ app.post("/api/auth/login", async (req, res) => {
     if (queryResult.length > 0) {
       const storedPassword = queryResult[0].mdp;
       const isAdmin = queryResult[0].admin;
+      const id_user = queryResult[0].id;
 
       const passwordMatch = await bcrypt.compare(user.mdp, storedPassword);
 
@@ -54,9 +55,9 @@ app.post("/api/auth/login", async (req, res) => {
             "INSERT INTO user_token (id_user, token) VALUES (?, ?)",
             [queryResult[0].id, token]
           );
-          res.json({ token, isAdmin });
+          res.json({ token, isAdmin, id_user });
         } else {
-          res.json({ token: tokenExists[0].token, isAdmin });
+          res.json({ token: tokenExists[0].token, isAdmin, id_user });
         }
       } else {
         res.status(401).json({ message: "Mot de passe incorrect" });
@@ -333,6 +334,46 @@ app.post("/api/character/delete", async (req, res) => {
     console.error("Erreur lors de la mise à jour du champion :", error);
     res.status(500).json({
       message: "Erreur serveur lors de la mise à jour du champion",
+    });
+  } finally {
+    await connection.end();
+  }
+});
+
+// Fonction qui permet d'ajouter un champion aux favoris (FAVORIS)
+
+app.post("/api/favorites/add", async (req, res) => {
+  const addFavorites = req.body;
+
+  const connection = await pool.getConnection();
+  try {
+    // Vérifier si l'utilisateur a déjà ajouté ce champion à son équipe
+    const existingFavorite = await connection.query(
+      "SELECT * FROM favorites WHERE id_user = ? AND id_character = ?",
+      [addFavorites.id_user, addFavorites.characterId]
+    );
+    console.log("HELLO");
+    console.log("HELLO");
+    console.log(addFavorites.id_user);
+    console.log("HELLO");
+
+    if (existingFavorite.length > 0) {
+      res.status(409).json({
+        message: "Ce champion est déjà dans votre équipe",
+      });
+    } else {
+      // Ajouter le champion à l'équipe dans la table "favorites"
+      await connection.query(
+        "INSERT INTO favorites (id_user, id_character) VALUES (?, ?)",
+        [addFavorites.id_user, addFavorites.characterId]
+      );
+
+      res.json({ message: "Champion ajouté à l'équipe avec succès" });
+    }
+  } catch (error) {
+    console.error("Erreur lors de l'ajout du champion à l'équipe :", error);
+    res.status(500).json({
+      message: "Erreur serveur lors de l'ajout du champion à l'équipe",
     });
   } finally {
     await connection.end();

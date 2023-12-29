@@ -16,8 +16,43 @@ async function loadCharacters() {
   characters.value = responseCharacters
 }
 
+let id_user = localStorage.getItem('id_user')
+
+async function addToTeam(character: Character) {
+  try {
+    // Ajoutez une vérification pour vous assurer que id_user est défini
+    if (!id_user) {
+      console.error('ID utilisateur non défini')
+      return
+    }
+
+    console.log("Tentative d'ajout à l'équipe avec ID utilisateur:", id_user)
+
+    const response = await fetch('/api/favorites/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        characterId: character.id,
+        id_user: id_user
+      })
+    })
+
+    if (response.ok) {
+      console.log("Champion ajouté à l'équipe")
+      // Mettez à jour votre équipe ou effectuez d'autres actions nécessaires ici.
+    } else {
+      console.error("Échec de l'ajout du champion à l'équipe")
+    }
+  } catch (error) {
+    console.error("Une erreur est survenue lors de l'ajout du champion à l'équipe", error)
+  }
+}
+
 loadCharacters()
 </script>
+
 <template>
   <div class="characters-content">
     <h1>Champions</h1>
@@ -27,7 +62,9 @@ loadCharacters()
       <div v-for="character in characters" :key="character.id" class="character-card">
         <h2>{{ character.name }}</h2>
         <p>{{ character.description }} de type {{ character.aatype }}</p>
-        <button class="character-card-button">Ajouter à l'équipe</button>
+        <button @click="() => addToTeam(character)" class="character-card-button">
+          Ajouter à l'équipe
+        </button>
       </div>
     </div>
 
