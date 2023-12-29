@@ -1,0 +1,14 @@
+@base_url=http://localhost:3000/api
+
+POST http://localhost:3000/api/users/add
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "mdp": "azertyuiop"
+}
+
+###
+
+GET http://localhost:3000/api/characters/favorites
+
