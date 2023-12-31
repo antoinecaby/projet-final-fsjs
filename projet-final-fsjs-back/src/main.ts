@@ -15,6 +15,16 @@ const pool = mariadb.createPool({
 const app = express();
 app.use(bodyParser.json());
 
+// Middleware pour autoriser CORS
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 // ---------- ---------- ---------- ---------- ----------
 // A partir d'ici, les fonctions permettent de gérer les users (login, register, update, delete)
 

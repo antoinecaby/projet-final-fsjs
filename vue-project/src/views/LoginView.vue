@@ -84,7 +84,7 @@ async function login() {
     <div class="div-link-register">
       <p class="login-message-true">{{ loginMessageTrue }}</p>
       <p class="login-message-false">{{ loginMessageFalse }}</p>
-      <a href="/register" class="link-register">Créer un compte !</a>
+      <router-link to="/register" class="link-register">Créer un compte !</router-link>
     </div>
   </div>
 </template>

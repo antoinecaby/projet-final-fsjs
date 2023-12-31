@@ -18,12 +18,12 @@ if (theToken) {
       ajouter des champions à votre équipe, connectez-vous !<br /><br />(Si vous venez de vous
       connecter, rechargez la page !)
     </p>
-    <a href="/login" class="homeview-content-login">Se connecter</a>
+    <router-link to="/login" class="homeview-content-login">Se connecter</router-link>
   </div>
   <div v-if="isConnected" class="homeview-content">
     <h1>Bienvenue sur LoL Chooser</h1>
     <p>Ajoutez des champions à votre équipe dès maintenant !</p>
-    <a href="/characters" class="homeview-content-login">Créer mon équipe</a>
+    <router-link to="/characters" class="homeview-content-login">Créer mon équipe</router-link>
   </div>
 </template>
 

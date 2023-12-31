@@ -5,7 +5,7 @@
     <h2>Erreur</h2>
     <h1>404</h1>
     <p>La page que vous avez demander n'existe pas !</p>
-    <a href="/" class="notfound-link">Retour à l'acccueil</a>
+    <router-link to="/" class="notfound-link">Retour à l'acccueil</router-link>
   </div>
 </template>
 

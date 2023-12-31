@@ -10,17 +10,17 @@
     <div class="admin-content1">
       <h2>Créer un compte</h2>
       <br />
-      <a href="/register" class="admin-content-link">Cliquez ici !</a>
+      <router-link to="/register" class="admin-content-link">Cliquez ici !</router-link>
     </div>
     <div class="admin-content2">
       <h2>Modifier un compte</h2>
       <br />
-      <a href="/admin/update" class="admin-content-link">Cliquez ici !</a>
+      <router-link to="/admin/update" class="admin-content-link">Cliquez ici !</router-link>
     </div>
     <div class="admin-content3">
       <h2>Supprimer un compte</h2>
       <br />
-      <a href="/admin/supp" class="admin-content-link">Cliquez ici !</a>
+      <router-link to="/admin/supp" class="admin-content-link">Cliquez ici !</router-link>
     </div>
   </div>
   <hr class="admin-separator" />
@@ -32,17 +32,17 @@
     <div class="admin-content1">
       <h2>Ajouter un champion</h2>
       <br />
-      <a href="/add-character" class="admin-content-link">Cliquez ici !</a>
+      <router-link to="/add-character" class="admin-content-link">Cliquez ici !</router-link>
     </div>
     <div class="admin-content2">
       <h2>Modifier un champion</h2>
       <br />
-      <a href="/update-character" class="admin-content-link">Cliquez ici !</a>
+      <router-link to="/update-character" class="admin-content-link">Cliquez ici !</router-link>
     </div>
     <div class="admin-content3">
       <h2>Supprimer un champion</h2>
       <br />
-      <a href="/delete-character" class="admin-content-link">Cliquez ici !</a>
+      <router-link to="/delete-character" class="admin-content-link">Cliquez ici !</router-link>
     </div>
   </div>
 </template>

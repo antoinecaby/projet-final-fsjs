@@ -35,15 +35,17 @@ async function logout() {
 <template>
   <header>
     <div class="header-right">
-      <a href="/"><h1>LoL Chooser</h1></a>
+      <h1><router-link to="/" class="header-right-link">LoL Chooser</router-link></h1>
     </div>
 
     <div class="header-left">
       <ul class="nav-list">
-        <li><a href="/" class="nav-list-link">Accueil</a></li>
-        <li><a href="/characters" class="nav-list-link">Champions</a></li>
-        <li v-if="admin"><a href="/admin" class="nav-list-link">Admin</a></li>
-        <li v-if="!isConnected"><a href="/login" class="nav-list-button">Se connecter</a></li>
+        <li><router-link to="/" class="nav-list-link">Accueil</router-link></li>
+        <li><router-link to="/characters" class="nav-list-link">Champions</router-link></li>
+        <li v-if="admin"><router-link to="/admin" class="nav-list-link">Admin</router-link></li>
+        <li v-if="!isConnected">
+          <router-link to="/login" class="nav-list-button">Se connecter</router-link>
+        </li>
         <li v-if="isConnected">
           <button @click="logout" class="nav-list-button">Se déconnecter</button>
         </li>
@@ -114,10 +116,11 @@ header {
   text-decoration: none;
 }
 
-.header-right h1 {
+.header-right-link {
   font-family: Krub;
   font-weight: 400;
   font-size: 25px;
   color: #e9edf0;
+  font-size: 30px;
 }
 </style>
